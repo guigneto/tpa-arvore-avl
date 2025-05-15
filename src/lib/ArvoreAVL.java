@@ -27,4 +27,28 @@ public class ArvoreAVL <T> extends ArvoreBinaria<T>{
         return raiz;
     }
 
+    @Override
+    protected No<T> removerRecursivo(No<T> atual, T valor) {
+        atual = super.removerRecursivo(atual, valor);
+
+        if (atual == null) return null;
+
+        int fb = atual.fatorBalanceamento();
+
+        if (fb > 1) { // Direita desbalanceada
+            if (atual.getFilhoDireita().fatorBalanceamento() >= 0) {
+                return rotacaoEsquerda(atual);
+            } else {
+                return rotacaoDireitaEsquerda(atual);
+            }
+        } else if (fb < -1) { // Esquerda desbalanceada
+            if (atual.getFilhoEsquerda().fatorBalanceamento() <= 0) {
+                return rotacaoDireita(atual);
+            } else {
+                return rotacaoEsquerdaDireita(atual);
+            }
+        }
+
+        return atual;
+    }
 }
