@@ -21,7 +21,7 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T>{
 
     }
 
-    private No<T> inserirRecursivo(No<T> atual, T valor) {
+    protected No<T> inserirRecursivo(No<T> atual, T valor) {
         if (atual == null) {
             quantidade++;
             return new No<>(valor);
@@ -44,7 +44,7 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T>{
         return pesquisarRecursivo(raiz, val);
     }
 
-    private T pesquisarRecursivo(No<T> atual, T valor) {
+    protected T pesquisarRecursivo(No<T> atual, T valor) {
         if (atual == null) return null;
 
         int cmp = comparador.compare(valor, atual.getValor());
@@ -64,7 +64,7 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T>{
         return pesquisarComComparator(raiz, val, comp);
     }
 
-    private T pesquisarComComparator(No<T> atual, T valor, Comparator comp) {
+    protected T pesquisarComComparator(No<T> atual, T valor, Comparator comp) {
         if (atual == null) return null;
 
         // Primeiro: tenta comparar no nó atual
@@ -89,7 +89,7 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T>{
         return val;
     }
 
-    private No<T> removerRecursivo(No<T> atual, T valor) {
+    protected No<T> removerRecursivo(No<T> atual, T valor) {
         if (atual == null) return null;
 
         int cmp = comparador.compare(valor, atual.getValor());
@@ -143,7 +143,7 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T>{
         return contarNos(raiz);
     }
 
-    private int contarNos(No<T> no) {
+    protected int contarNos(No<T> no) {
         if (no == null) return 0;
         return 1 + contarNos(no.getFilhoEsquerda()) + contarNos(no.getFilhoDireita());
     }
@@ -175,7 +175,7 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T>{
         return resultado.toString().trim(); // remove o espaço no fim
     }
 
-    private void caminharEmOrdem(No<T> no, StringBuilder sb) {
+    protected void caminharEmOrdem(No<T> no, StringBuilder sb) {
         if (no != null) {
             caminharEmOrdem(no.getFilhoEsquerda(), sb);
             sb.append(no.getValor()).append(" ");
